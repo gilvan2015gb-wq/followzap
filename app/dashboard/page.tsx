@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
-import type { Lead } from '@/types'
 
 // ─── Helpers ────────────────────────────────────────────────
 function minutosDesde(dateStr: string) {
