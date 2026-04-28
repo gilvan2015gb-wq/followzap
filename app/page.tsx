@@ -14,12 +14,20 @@ export default function Home() {
           <span className="text-green-500 text-xl">⚡</span>
           <span className="font-bold text-gray-900 text-lg tracking-tight">Followzap</span>
         </div>
-        <button
-          onClick={() => router.push('/register')}
-          className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
-        >
-          router.push('/login') →
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => router.push('/login')}
+            className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
+          >
+            Entrar
+          </button>
+          <button
+            onClick={() => router.push('/register')}
+            className="text-sm bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded-lg transition-colors"
+          >
+            Criar conta
+          </button>
+        </div>
       </header>
 
       {/* Hero */}
@@ -60,13 +68,15 @@ export default function Home() {
           {/* CTA */}
           <div className="flex flex-col items-center gap-3">
             <button
-              onClick={() => router.push('/dashboard')}
+              onClick={() => router.push('/login')}
               className="bg-green-500 hover:bg-green-600 active:scale-95 text-white font-bold text-base px-8 py-4 rounded-xl transition-all shadow-lg shadow-green-100"
             >
               Entrar na demo →
             </button>
             <p className="text-xs text-gray-400">
-              Sem cadastro. Sem cartão. Só testar.
+              Já tem conta? <button onClick={() => router.push('/login')} className="underline hover:text-gray-600">Entrar</button>
+              {' · '}
+              <button onClick={() => router.push('/register')} className="underline hover:text-gray-600">Criar conta grátis</button>
             </p>
           </div>
         </div>
