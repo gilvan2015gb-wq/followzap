@@ -33,7 +33,8 @@ export default function Login() {
       return
     }
 
-    router.push('/dashboard')
+   router.replace('/dashboard')
+   router.refresh()
   }
 
   function aoApertarEnter(e: React.KeyboardEvent) {
