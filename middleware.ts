@@ -25,20 +25,26 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  // Atualiza a sessão — obrigatório para o middleware funcionar
+  // getSession lê o cookie direto — funciona no edge runtime
   const { data: { session } } = await supabase.auth.getSession()
 
   const { pathname } = request.nextUrl
 
-  const rotaProtegida = pathname.startsWith('/dashboard') || pathname.startsWith('/leads')
-  const rotaDeAuth    = pathname === '/login' || pathname === '/register'
+  const rotaProtegida = pathname.startsWith('/dashboard') ||
+                        pathname.startsWith('/leads')
+  const rotaDeAuth    = pathname === '/login' ||
+                        pathname === '/register'
 
+  // Sem sessão tentando entrar em área protegida
   if (!session && rotaProtegida) {
-    return NextResponse.redirect(new URL('/login', request.url))
+    const url = new URL('/login', request.url)
+    return NextResponse.redirect(url)
   }
 
+  // Com sessão tentando acessar login/register
   if (session && rotaDeAuth) {
-    return NextResponse.redirect(new URL('/dashboard', request.url))
+    const url = new URL('/dashboard', request.url)
+    return NextResponse.redirect(url)
   }
 
   return response
