@@ -25,20 +25,19 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  const { data: { user } } = await supabase.auth.getUser()
+  // Atualiza a sessão — obrigatório para o middleware funcionar
+  const { data: { session } } = await supabase.auth.getSession()
 
   const { pathname } = request.nextUrl
 
   const rotaProtegida = pathname.startsWith('/dashboard') || pathname.startsWith('/leads')
   const rotaDeAuth    = pathname === '/login' || pathname === '/register'
 
-  // Não logado tentando acessar área protegida → vai para login
-  if (!user && rotaProtegida) {
+  if (!session && rotaProtegida) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
 
-  // Logado tentando acessar login ou register → vai para dashboard
-  if (user && rotaDeAuth) {
+  if (session && rotaDeAuth) {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
