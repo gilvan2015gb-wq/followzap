@@ -15,10 +15,10 @@ export default function Home() {
           <span className="font-bold text-gray-900 text-lg tracking-tight">Followzap</span>
         </div>
         <button
-          onClick={() => router.push('/dashboard')}
+          onClick={() => router.push('/register')}
           className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
         >
-          Entrar →
+          router.push('/login') →
         </button>
       </header>
 
